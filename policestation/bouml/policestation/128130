@@ -1,0 +1,467 @@
+format 70
+"data" // domain::data
+  revision 3
+  modified_by 2 "joao"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  php_dir "/home/joao/PoliceStation/policestation/domain/data/"
+  classview 128130 "classes-data"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    associated_deployment_view deploymentview_ref 128002 // classes-data
+    class 128898 "PoliceUnit"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128002 // <generalisation>
+	relation 128002 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128002 // <generalisation>
+	  b parent class_ref 128642 // Unit
+      end
+
+      classrelation 128642 // <aggregation>
+	relation_ref 128386 // <aggregation>
+      end
+
+      classrelation 128898 // <aggregation>
+	relation_ref 128514 // <aggregation>
+      end
+
+      operation 130818 "getStats"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+	comment "returns a PoliceUnitStats object with the stats of this PoliceUnit"
+      end
+
+      classrelation 137986 // <dependency>
+	relation 136706 -_->
+	  a default
+	    classrelation_ref 137986 // <dependency>
+	  b parent class_ref 136578 // CriminalStats
+      end
+    end
+
+    class 128770 "Criminal"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128130 // <generalisation>
+	relation 128130 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128130 // <generalisation>
+	  b parent class_ref 128642 // Unit
+      end
+
+      classrelation 129410 // <aggregation>
+	relation_ref 128770 // <aggregation>
+      end
+
+      classrelation 138242 // <dependency>
+	relation 136962 -_->
+	  a default
+	    classrelation_ref 138242 // <dependency>
+	  b parent class_ref 136450 // PoliceUnitStats
+      end
+    end
+
+    class 128642 "Unit"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 138114 // <dependency>
+	relation 136834 -_->
+	  a default
+	    classrelation_ref 138114 // <dependency>
+	  b parent class_ref 136322 // UnitStats
+      end
+    end
+
+    class 128514 "Patrol"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128386 // <aggregation>
+	relation_ref 128258 // <aggregation>
+      end
+
+      classrelation 128770 // <aggregation>
+	relation 128514 o---
+	  a role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 128770 // <aggregation>
+	  b role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 128898 // <aggregation>
+      end
+
+      classrelation 129154 // <aggregation>
+	relation_ref 128642 // <aggregation>
+      end
+
+      operation 130306 "getUnits"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+	comment "returns an array with the Patrol units"
+      end
+
+      operation 130690 "getUnit"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "unitId" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 128386 "PoliceStation"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128258 // <aggregation>
+	relation 128258 o---
+	  a role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 128258 // <aggregation>
+	  b role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 128386 // <aggregation>
+      end
+
+      classrelation 128514 // <aggregation>
+	relation 128386 o---
+	  a role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 128514 // <aggregation>
+	  b role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 128642 // <aggregation>
+      end
+
+      classrelation 129666 // <aggregation>
+	relation_ref 128898 // <aggregation>
+      end
+
+      classrelation 129922 // <aggregation>
+	relation_ref 129026 // <aggregation>
+      end
+
+      operation 130178 "getPatrols"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+	comment "returns an array with the PoliceStation patrols"
+      end
+
+      operation 130562 "getPatrol"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "patrolID" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 128258 "Zone"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129026 // <aggregation>
+	relation 128642 o---
+	  a role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 129026 // <aggregation>
+	  b role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 129154 // <aggregation>
+      end
+
+      classrelation 129282 // <aggregation>
+	relation 128770 o---
+	  a role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 129282 // <aggregation>
+	  b role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 129410 // <aggregation>
+      end
+
+      classrelation 129538 // <aggregation>
+	relation 128898 o---
+	  a role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 129538 // <aggregation>
+	  b role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 129666 // <aggregation>
+      end
+    end
+
+    class 128130 "Player"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129794 // <aggregation>
+	relation 129026 o---
+	  a role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 129794 // <aggregation>
+	  b role_name "" private
+	    php "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	    classrelation_ref 129922 // <aggregation>
+      end
+
+      operation 129922 "getPoliceStations"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+	comment "returns an array with all policeStations of the player"
+      end
+
+      operation 130050 "getPoliceStation"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "id" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+  end
+
+  deploymentview 128002 "classes-data"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 128002 "PoliceUnit"
+      stereotype "source"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      associated_classes
+	class_ref 128898 // PoliceUnit
+      end
+    end
+
+    artifact 128130 "Criminal"
+      stereotype "source"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      associated_classes
+	class_ref 128770 // Criminal
+      end
+    end
+
+    artifact 128258 "Unit"
+      stereotype "source"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      associated_classes
+	class_ref 128642 // Unit
+      end
+    end
+
+    artifact 128386 "Patrol"
+      stereotype "source"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      associated_classes
+	class_ref 128514 // Patrol
+      end
+    end
+
+    artifact 128514 "PoliceStation"
+      stereotype "source"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      associated_classes
+	class_ref 128386 // PoliceStation
+      end
+    end
+
+    artifact 128642 "Zone"
+      stereotype "source"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      associated_classes
+	class_ref 128258 // Zone
+      end
+    end
+
+    artifact 128770 "Player"
+      stereotype "source"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      associated_classes
+	class_ref 128130 // Player
+      end
+    end
+  end
+end

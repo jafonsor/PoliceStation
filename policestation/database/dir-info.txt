@@ -1,0 +1,8 @@
+This directory holds the sql files that create tables.
+The db.propertys file has the propertys of the sql database: username, password,database name. It can be used by ant in a target, by php, etc.
+
+StatsTables - stat tables of the game Units
+
+DataTables - tables that hold instances of the several objects of the game
+
+TranslationTables - tables used to translate

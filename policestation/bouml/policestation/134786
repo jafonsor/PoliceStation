@@ -1,0 +1,334 @@
+format 70
+"dbinterface" // domain::dbinterface
+  revision 1
+  modified_by 2 "joao"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  php_dir "/home/joao/PoliceStation/policestation/dbinterface/"
+  classview 134786 "classes-dbinterface"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 135938 "PostgresDatabase"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 129282 "connect"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "host" explicit_type ""
+	  param in name "username" explicit_type ""
+	  param in name "password" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129410 "select_db"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "dbname" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129538 "query"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "queryStr" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129666 "num_rows"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "cursor" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129794 "fetch_array"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "cursor" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      classrelation 136834 // <generalisation>
+	relation 135938 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 136834 // <generalisation>
+	  b parent class_ref 135682 // Database
+      end
+    end
+
+    class 135810 "MysqlDatabase"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128642 "connect"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "host" explicit_type ""
+	  param in name "username" explicit_type ""
+	  param in name "password" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 128770 "select_db"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "dbname" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 128898 "query"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "queryStr" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129026 "num_rows"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "cursor" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129154 "fetch_array"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "cursor" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      classrelation 136706 // <generalisation>
+	relation 135810 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 136706 // <generalisation>
+	  b parent class_ref 135682 // Database
+      end
+    end
+
+    class 135682 "Database"
+      abstract visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      comment "interface to access the database."
+      operation 128002 "connect"
+	abstract cpp_virtual public explicit_return_type ""
+	nparams 3
+	  param in name "host" explicit_type ""
+	  param in name "username" explicit_type ""
+	  param in name "password" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}${)};"
+	
+	
+      end
+
+      operation 128130 "select_db"
+	abstract cpp_virtual public explicit_return_type ""
+	nparams 1
+	  param in name "dbname" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)};"
+	
+	
+      end
+
+      operation 128258 "query"
+	abstract cpp_virtual public explicit_return_type ""
+	nparams 1
+	  param in name "queryStr" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)};"
+	
+	
+      end
+
+      operation 128386 "num_rows"
+	abstract cpp_virtual public explicit_return_type ""
+	nparams 1
+	  param in name "cursor" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)};"
+	
+	
+      end
+
+      operation 128514 "fetch_array"
+	abstract cpp_virtual public explicit_return_type ""
+	nparams 1
+	  param in name "cursor" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)};"
+	
+	
+      end
+
+      attribute 128386 "username"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 128514 "password"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 128642 "dbname"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+    end
+  end
+end

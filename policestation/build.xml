@@ -1,0 +1,66 @@
+<project name="PoliceStation" basedir="." default="show">
+
+	<property file="db.properties" prefix="sql"/>
+	<property name="sql.db.url" value="${sql.url}/${sql.database}" />
+
+	<property name="db.dir" value="database"/>
+	<property name="db.stats.dir" value="${db.dir}/StatsTables" />
+	<property name="db.data.dir" value="${db.dir}/DataTables"/>
+	<property name="db.translate.dir" value="${db.dir}/TranslationTables" />
+
+	<property name="lib.dir" value="../lib" />
+	<property name="jar.lib.dir" value="${lib.dir}/jar" />
+
+	<path id="lib.path">
+		<fileset dir="${jar.lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="show" description="Shows the project properties">
+		<echo message="Project properties:" />
+		<echo message="-- Database --" />
+		<echo message="username: ${sql.username}" />
+		<echo message="password: ${sql.password}" />
+		<echo message="database: ${sql.database}" />
+		<echo message="driver: ${sql.driver}" />
+		<echo message="url: ${sql.url}" />
+	</target>
+
+	<target name="create-db">
+		<sql driver="${sql.driver}" url="${sql.url}" userid="${sql.username}"
+		     password="${sql.password}" >
+			<classpath>
+				<path refid="lib.path"/>
+			</classpath>
+			
+			DROP DATABASE IF EXISTS ${sql.database};		
+			CREATE DATABASE ${sql.database};	
+		</sql>
+	</target>
+
+	<target name="build-db" depends="create-db">
+		<sql driver="${sql.driver}" url="${sql.db.url}" userid="${sql.username}"
+		     password="${sql.password}" >
+			<classpath>
+				<path refid="lib.path"/>
+			</classpath>
+
+			<transaction src="${db.stats.dir}/UnitsStats.sql" />
+			<transaction src="${db.stats.dir}/PoliceUnitsStats.sql" />
+			<transaction src="${db.stats.dir}/CriminalStats.sql" />
+
+			<transaction src="${db.data.dir}/Game.sql" />
+			<transaction src="${db.data.dir}/Players.sql" />
+			<transaction src="${db.data.dir}/Zones.sql" />
+			<transaction src="${db.data.dir}/PoliceStation.sql" />
+			<transaction src="${db.data.dir}/StationedUnits.sql" />
+			<transaction src="${db.data.dir}/PatrolingUnits.sql" />
+			<transaction src="${db.data.dir}/Criminals.sql" /> 
+
+			<transaction src="${db.translate.dir}/UnitTranslation.sql" />
+			<transaction src="${db.translate.dir}/StatsNameTranslation.sql" />
+		</sql>
+	</target>
+
+</project>
