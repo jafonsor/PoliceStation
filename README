@@ -1,0 +1,1 @@
+Em princípio para por a funcionar basta alterar o db.properties. É lá que se define o username, password, nome e host da base de dados. Também é possivel alternar entre base de dados postgres e mysql na propriedade dbtype.
