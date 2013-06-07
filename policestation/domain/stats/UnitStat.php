@@ -1,12 +1,15 @@
 <?php
 
-abstract class Unit {
+class UnitStat {
   private $id;
 
   public function getId()
   {
   }
 
-  public abstract function getStats();
+  public function getValue()
+  {
+  }
+
 }
 ?>

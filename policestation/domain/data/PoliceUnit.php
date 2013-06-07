@@ -1,9 +1,11 @@
 <?php
 
 class PoliceUnit extends Unit {
-  private $;
 
-  private $;
+  //returns a PoliceUnitStats object with the stats of this PoliceUnit
+  public function getStats()
+  {
+  }
 
 }
 ?>
