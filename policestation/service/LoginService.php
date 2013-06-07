@@ -17,9 +17,16 @@ class LoginService extends PoliceStationService {
 	 * throws WrongPasswordException if the password is wrong.
 	 */
 	public function dispatch() {
-		$player = getGame()->getPlayerByName($this->username);
+		try {
+			$player = getGame()->getPlayerByName($this->username);
+		} catch(NonexistingPlayer e) {
+			getDatabase()->closeConnection();
+			throw e;
+		}
+		
 		$hashedPassword = passwordHashFunction($password, $player->getId());
-		if( $hashedPassword != $player->getPassword() )
+		if( $hashedPassword != $player->getPassword() ) {
+			getDatabase()->closeConnection();
 			throw new WrongPasswordException(); 
 	}
 	
