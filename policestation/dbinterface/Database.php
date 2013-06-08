@@ -16,10 +16,12 @@ abstract class Database {
   private $connection;
 
   public abstract function connect();
-  public abstract function closeConnection();
+  public abstract function close_connection();
   public abstract function select_db($dbname);
   public abstract function query($queryStr);
   public abstract function num_rows($cursor);
   public abstract function fetch_array($cursor);
+  public abstract function start_transaction();
+  public abstract function commit();
 }
 ?>

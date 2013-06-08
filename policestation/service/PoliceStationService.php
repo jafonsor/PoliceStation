@@ -11,10 +11,10 @@ class PoliceStationService {
 		*/
 		database->connect();
 		
-		database->startTransaction();
+		database->start_transaction();
 		dispatch();
 		database->commit();
-		database->closeConnection();
+		database->close_connection();
 	}
 	
 	private function getDatabase() {
