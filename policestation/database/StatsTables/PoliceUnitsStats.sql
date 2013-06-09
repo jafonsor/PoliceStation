@@ -1,5 +1,5 @@
 create table PoliceUnitsStats (
-	unit_id		int, /* key */
+	unit_id		int unsigned, /* key */
 	price		int	not null	check(price >= 0),
 	primary key(unit_id),
 	foreign key(unit_id) references UnitsStats(id)

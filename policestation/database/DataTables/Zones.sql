@@ -1,7 +1,7 @@
 create table Zones(
-	id		int, /* primary key */
-	x_coord		int	not null,
-	y_coord		int	not null,
+	id		int unsigned, /* primary key */
+	x_coord		int unsigned	not null,
+	y_coord		int unsigned	not null,
 	primary key(id)
 );
 

@@ -1,7 +1,7 @@
 --Holds global variables of the game
 create table Game (
 	varName		varchar(255),	/* primary key */
-	varValue	int,
+	varValue	int unsigned,
 	primary key(varName)
 );
 

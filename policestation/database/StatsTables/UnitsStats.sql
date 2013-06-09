@@ -1,5 +1,5 @@
 create table UnitsStats (
-	id	int, /* primary key */
-	speed	int,
+	id	int unsigned, /* primary key */
+	speed	int unsigned,
 	primary key(id)
 );
