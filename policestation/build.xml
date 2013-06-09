@@ -7,6 +7,7 @@
 	<property name="db.stats.dir" value="${db.dir}/StatsTables" />
 	<property name="db.data.dir" value="${db.dir}/DataTables"/>
 	<property name="db.translate.dir" value="${db.dir}/TranslationTables" />
+	<property name="db.logs.dir" value="${db.dir}/LogTables" />
 
 	<property name="lib.dir" value="../lib" />
 	<property name="jar.lib.dir" value="${lib.dir}/jar" />
@@ -60,6 +61,8 @@
 
 			<transaction src="${db.translate.dir}/UnitTranslation.sql" />
 			<transaction src="${db.translate.dir}/StatsNameTranslation.sql" />
+
+			<transaction src="${db.logs.dir}/ErrorLog.sql" />
 		</sql>
 	</target>
 

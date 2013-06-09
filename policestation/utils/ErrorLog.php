@@ -19,8 +19,8 @@ class ErrorLog {
 		$database->connect();
 		$database->start_transaction();
 		$query = sprintf("INSERT INTO TABLE ErrorLog (id,date,type,file,line,message) values(%s,%s,%s,%s,%s)",
-			          getLastErrorId();
-			          date("d/m/Y H:i:s e"),
+			          getLastErrorId(),
+			          "CURRENT_TIMESTAMP",
 			          $type,
 			          $file,
 			          $line,
