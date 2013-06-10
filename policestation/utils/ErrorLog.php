@@ -26,7 +26,7 @@ class ErrorLog {
 			          $line,
 			          $message);
 		$_SESSION["database"]->query( $query );
-		$database->commit();anesthasia
+		$database->commit();
 		$database->close_connection();
 	}
 	

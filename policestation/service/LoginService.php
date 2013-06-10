@@ -27,7 +27,8 @@ class LoginService extends PoliceStationService {
 		$hashedPassword = passwordHashFunction($password, $player->getId());
 		if( $hashedPassword != $player->getPassword() ) {
 			getDatabase()->closeConnection();
-			throw new WrongPasswordException(); 
+			throw new WrongPasswordException();
+		}
 	}
 	
 	public function getId() {
