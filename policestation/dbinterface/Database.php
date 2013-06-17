@@ -11,9 +11,9 @@ abstract class Database {
 
   private $host;
 
-  private $port;s
+  private $port;
   
-  public __construct($username, $password, $dbname, $host, $port) {
+  public function __construct($username, $password, $dbname, $host, $port) {
   	$this->username = $username;
   	$this->password = $password;
   	$this->dbname = $dbname;
@@ -41,5 +41,7 @@ abstract class Database {
   public abstract function fetch_assoc($result);
   public abstract function start_transaction();
   public abstract function commit();
+  public abstract function field_name($result, $indice);
+  public abstract function fetch_row($result);
 }
 ?>

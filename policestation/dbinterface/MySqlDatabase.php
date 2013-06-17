@@ -5,16 +5,16 @@ class MySqlDatabase extends Database {
 	private $openConnection; // boolean that is true if $connection is open and false otherwise.
 	private $connection;
 
-	public __construct($username, $password, $dbname, $host, $port) {
-	parent::__construct($username, $password, $dbname, $host, $port);
+	public function __construct($username, $password, $dbname, $host, $port) {
+		parent::__construct($username, $password, $dbname, $host, $port);
 	}
 	
-	protected setConnection($connection) { $this->connection = $connection; }
-	protected getConnection() { return $this->connection; }
+	protected function setConnection($connection) { $this->connection = $connection; }
+	protected function getConnection() { return $this->connection; }
 	
-	protected connectionOpened() { $this->openConnection = true; }
-	protected connectionClosed() { $this->openConnection = false; }
-	public getOpenConnection() { return $this->openConnection; }
+	protected function connectionOpened() { $this->openConnection = true; }
+	protected function connectionClosed() { $this->openConnection = false; }
+	public function getOpenConnection() { return $this->openConnection; }
 
 	/**
 	 * Connects to the data base. This function may be called serveral times without closing the connections.
@@ -22,9 +22,19 @@ class MySqlDatabase extends Database {
 	 * I think this isn't rigth but I don't know how to do it.
 	 */
 	public function connect() {
-		$connection = mysql_connect(getHost().":".getPort(), getUsername(), getPassword()) );
+		if(getOpenConnection()) {
+			$connection = mysql_connect(getHost().":".getPort(), getUsername(), getPassword(), getConnection());
+		} else {
+			$connection = mysql_connect(getHost().":".getPort(), getUsername(), getPassword());
+		}
+		
 		if($connection == false) {
-			ErrorLog::log("database",__DIR__.__FILE__,__LINE__,"failed to connect to server: " . getHost().":".getPort());
+			echo "The connection failled!\n";
+			ErrorLog::log("database",
+			              __DIR__.__FILE__,
+			              __LINE__,
+			              "failed to connect to server " . getHost().":".getPort() . ": " . mysql_error());
+			exit(ErrorPage::databaseErrorPage("Connection to host faild: " . mysql_error()));
 		}
 		select_db();
 		connectionOpened();
@@ -55,13 +65,20 @@ class MySqlDatabase extends Database {
 		return mysql_fetch_assoc($result);
 	}  
 
-	public abstract function start_transaction() {
+	public function start_transaction() {
 		return mysql_start_transaction();
 	}
 
-	public abstract function commit() {
+	public function commit() {
 		return mysql_commit();
 	}
 
+	public function field_name( $result, $indice ) {
+		return mysql_field_name($result, $indice);
+	}
+	
+	public function fetch_row($result) {
+		return mysql_fetch_row($result);
+	}
 }
 ?>

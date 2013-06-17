@@ -12,6 +12,8 @@
 	<property name="lib.dir" value="../lib" />
 	<property name="jar.lib.dir" value="${lib.dir}/jar" />
 
+	<property name="deploy.dir" value="/var/www/policestation" />
+
 	<path id="lib.path">
 		<fileset dir="${jar.lib.dir}">
 			<include name="*.jar"/>
@@ -64,6 +66,11 @@
 
 			<transaction src="${db.logs.dir}/ErrorLog.sql" />
 		</sql>
+	</target>
+
+	<target name="deploy-test">
+		<mkdir dir="${deploy.dir}"/>
+		<copy file="../" todir="${deploy.dir}" />
 	</target>
 
 </project>

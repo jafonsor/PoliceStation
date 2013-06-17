@@ -9,7 +9,7 @@ class ErrorChecker {
 	public static function issetSessionVar($var, $file, $line) {
 		if(!isset($_SESSION[$var]) {
 			ErrorLog::log(ErrorLog::SESSION,$file,$line, $var " var is not set in this SESSION");
-			exit(ErrorPages::sessionErrorPage());
+			exit(ErrorPages::sessionErrorPage(null));
 		}
 	}
 	
@@ -20,7 +20,7 @@ class ErrorChecker {
 	public static function isInvalidQueryResult($result, $file, $line, $query) {
 		if(!$result) {
 			ErrorLog::log(ErrorLog::DATABASE,$file,$line,"Query: " . PHP_EOL . $query);
-			exit(ErrorPages::databaseErrorPage());
+			exit(ErrorPages::databaseErrorPage(null));
 		}
 	}
 }
