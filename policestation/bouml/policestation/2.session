@@ -4,12 +4,24 @@ diagrams
     1348 728 100 4 0 0
 end
 show_stereotypes
-selected classview_ref 128130 // classes-data
+selected 
+  package_ref 128002 // domain
 open
   classview_ref 128002 // classes-domain
-  
-  package_ref 128130 // data
-  
-  package_ref 134914 // stats
+  class_ref 128898 // PoliceUnit
+  class_ref 128770 // Criminal
+  operation_ref 138754 // getId
+  operation_ref 138882 // getId
+  class_ref 128386 // PoliceStation
+  class_ref 128258 // Zone
+  operation_ref 137346 // getName
+  operation_ref 137602 // getPassword
+  operation_ref 137474 // getMoney
+  class_ref 129154 // StatsNameTranslator
+  class_ref 129026 // UnitNameTranslator
+  class_ref 135682 // Database
+  class_ref 136578 // CriminalStat
+  class_ref 136450 // PoliceUnitStat
+  class_ref 136322 // UnitStat
 end
 end

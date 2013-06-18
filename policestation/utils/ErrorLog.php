@@ -1,25 +1,30 @@
 <?php
 
-class ErrorLog {
+$projbasedir = $_SESSION["basedir"];
+$ERROR_LOG_EXCEPTION_PHP =
+	realpath($projbasedir."/exception/ErrorLogException.php");
+require_once($ERROR_LOG_EXCEPTION_PHP);
 
+class ErrorLog {
 	
-	public static $SESSION = "session";
-	public static $DATABASE = "database";
-	
-	private checkAndGetDatabase() {
+	private static function checkAndGetDatabase() {
 		if(isset($_SESSION["database"])) {
 			return $_SESSION["database"];
 		} else {
-			ErrorPages::fatalError("undefine database!");
+			exit(ErrorPages::fatalError("can't log!"));
 		}
 	}
+	
+	public static function logException(ErrorLogException $e) {
+		ErrorLog::log($e->getErrorType(),$e->getFile(),$e->getLine(),$e->getMessage());
+	}
 
-	public function log($type,$file,$line,$message) {
-		$database = checkAndGetDatabase();
+	public static function log($type,$file,$line,$message) {
+		$database = ErrorLog::checkAndGetDatabase();
 		$database->connect();
 		$database->start_transaction();
 		$query = sprintf("INSERT INTO TABLE ErrorLog (id,date,type,file,line,message) values(%s,%s,%s,%s,%s)",
-			          getLastErrorId(),
+			          ErrorLog::getLastErrorId(),
 			          "CURRENT_TIMESTAMP",
 			          $type,
 			          $file,
@@ -30,8 +35,8 @@ class ErrorLog {
 		$database->close_connection();
 	}
 	
-	public function getLastErrorId() {
-		$database = checkAndGetDatabase();
+	public static function getLastErrorId() {
+		$database = ErrorLog::checkAndGetDatabase();
 		$query = "SELECT MAX(id) as maxId
 		          FROM   ErrorLog";
 		$result = $database->query( $query );

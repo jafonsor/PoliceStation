@@ -1,5 +1,10 @@
 <?php
 
+$projbasedir = $_SESSION["basedir"];
+$POLICE_STATION_SERVICE_PHP 
+	= realpath($projbasedir."/service/PoliceStationService.php");
+require_once($POLICE_STATION_SERVICE_PHP);
+
 class LoginService extends PoliceStationService {
 
 	private $username;
@@ -17,12 +22,8 @@ class LoginService extends PoliceStationService {
 	 * throws WrongPasswordException if the password is wrong.
 	 */
 	public function dispatch() {
-		try {
-			$player = getGame()->getPlayerByName($this->username);
-		} catch(NonexistingPlayer e) {
-			getDatabase()->closeConnection();
-			throw e;
-		}
+		
+		$player = getGame()->getPlayerByName($this->username);
 		
 		$hashedPassword = passwordHashFunction($password, $player->getId());
 		if( $hashedPassword != $player->getPassword() ) {

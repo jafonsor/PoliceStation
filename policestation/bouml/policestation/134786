@@ -1,6 +1,6 @@
 format 70
 "dbinterface" // domain::dbinterface
-  revision 1
+  revision 2
   modified_by 2 "joao"
   // class settings
   //class diagram settings
@@ -43,6 +43,7 @@ format 70
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
+    associated_deployment_view deploymentview_ref 134658 // classes-dbinterface
     class 135938 "PostgresDatabase"
       visibility package 
       cpp_decl ""
@@ -55,7 +56,7 @@ ${members}}
       explicit_switch_type ""
       
       operation 129282 "connect"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 3
 	  param in name "host" explicit_type ""
 	  param in name "username" explicit_type ""
@@ -71,7 +72,7 @@ ${members}}
       end
 
       operation 129410 "select_db"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "dbname" explicit_type ""
 	
@@ -85,7 +86,7 @@ ${members}}
       end
 
       operation 129538 "query"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "queryStr" explicit_type ""
 	
@@ -99,7 +100,7 @@ ${members}}
       end
 
       operation 129666 "num_rows"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "cursor" explicit_type ""
 	
@@ -113,7 +114,7 @@ ${members}}
       end
 
       operation 129794 "fetch_array"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "cursor" explicit_type ""
 	
@@ -147,7 +148,7 @@ ${members}}
       explicit_switch_type ""
       
       operation 128642 "connect"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 3
 	  param in name "host" explicit_type ""
 	  param in name "username" explicit_type ""
@@ -163,7 +164,7 @@ ${members}}
       end
 
       operation 128770 "select_db"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "dbname" explicit_type ""
 	
@@ -177,7 +178,7 @@ ${members}}
       end
 
       operation 128898 "query"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "queryStr" explicit_type ""
 	
@@ -191,7 +192,7 @@ ${members}}
       end
 
       operation 129026 "num_rows"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "cursor" explicit_type ""
 	
@@ -205,7 +206,7 @@ ${members}}
       end
 
       operation 129154 "fetch_array"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "cursor" explicit_type ""
 	
@@ -233,7 +234,7 @@ ${members}}
       java_decl "${comment}${@}${visibility}interface ${name}${extends} {
 ${members}}
 "
-      php_decl "${comment}${visibility}interface ${name} {
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
 ${members}}
 "
       python_2_2 python_decl ""
@@ -244,7 +245,7 @@ ${members}};
       
       comment "interface to access the database."
       operation 128002 "connect"
-	abstract cpp_virtual public explicit_return_type ""
+	abstract cpp_virtual public explicit_return_type "void"
 	nparams 3
 	  param in name "host" explicit_type ""
 	  param in name "username" explicit_type ""
@@ -257,7 +258,7 @@ ${members}};
       end
 
       operation 128130 "select_db"
-	abstract cpp_virtual public explicit_return_type ""
+	abstract cpp_virtual public explicit_return_type "void"
 	nparams 1
 	  param in name "dbname" explicit_type ""
 	
@@ -268,7 +269,7 @@ ${members}};
       end
 
       operation 128258 "query"
-	abstract cpp_virtual public explicit_return_type ""
+	abstract cpp_virtual public explicit_return_type "void"
 	nparams 1
 	  param in name "queryStr" explicit_type ""
 	
@@ -279,7 +280,7 @@ ${members}};
       end
 
       operation 128386 "num_rows"
-	abstract cpp_virtual public explicit_return_type ""
+	abstract cpp_virtual public explicit_return_type "void"
 	nparams 1
 	  param in name "cursor" explicit_type ""
 	
@@ -290,7 +291,7 @@ ${members}};
       end
 
       operation 128514 "fetch_array"
-	abstract cpp_virtual public explicit_return_type ""
+	abstract cpp_virtual public explicit_return_type "void"
 	nparams 1
 	  param in name "cursor" explicit_type ""
 	
@@ -328,6 +329,81 @@ ${members}};
 "
 	python_decl ""
 	idl_decl ""
+      end
+
+      attribute 135170 "host"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135298 "port"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+    end
+  end
+
+  deploymentview 134658 "classes-dbinterface"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 135554 "PostgresDatabase"
+      stereotype "source"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      associated_classes
+	class_ref 135938 // PostgresDatabase
+      end
+    end
+
+    artifact 135682 "MysqlDatabase"
+      stereotype "source"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      associated_classes
+	class_ref 135810 // MysqlDatabase
+      end
+    end
+
+    artifact 135810 "Database"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 135682 // Database
       end
     end
   end

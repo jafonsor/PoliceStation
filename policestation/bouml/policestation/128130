@@ -1,6 +1,6 @@
 format 70
 "data" // domain::data
-  revision 3
+  revision 4
   modified_by 2 "joao"
   // class settings
   //class diagram settings
@@ -72,7 +72,7 @@ ${members}}
       end
 
       operation 130818 "getStats"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 0
 	
 	
@@ -88,9 +88,11 @@ ${members}}
       classrelation 137986 // <dependency>
 	relation 136706 -_->
 	  a default
+	    php "${type}"
 	    classrelation_ref 137986 // <dependency>
-	  b parent class_ref 136578 // CriminalStats
+	  b parent class_ref 136578 // CriminalStat
       end
+
     end
 
     class 128770 "Criminal"
@@ -119,13 +121,27 @@ ${members}}
       classrelation 138242 // <dependency>
 	relation 136962 -_->
 	  a default
+	    php "${type}"
 	    classrelation_ref 138242 // <dependency>
-	  b parent class_ref 136450 // PoliceUnitStats
+	  b parent class_ref 136450 // PoliceUnitStat
+      end
+
+      operation 138626 "getStats"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
       end
     end
 
     class 128642 "Unit"
-      visibility package 
+      abstract visibility package 
       cpp_decl ""
       java_decl ""
       php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
@@ -138,8 +154,42 @@ ${members}}
       classrelation 138114 // <dependency>
 	relation 136834 -_->
 	  a default
+	    php "${type}"
 	    classrelation_ref 138114 // <dependency>
-	  b parent class_ref 136322 // UnitStats
+	  b parent class_ref 136322 // UnitStat
+      end
+
+      attribute 135810 "id"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 138754 "getId"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 138498 "getStats"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)};"
+	
+	
       end
     end
 
@@ -174,8 +224,21 @@ ${members}}
 	relation_ref 128642 // <aggregation>
       end
 
+      operation 138882 "getId"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
       operation 130306 "getUnits"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 0
 	
 	
@@ -189,7 +252,7 @@ ${members}}
       end
 
       operation 130690 "getUnit"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "unitId" explicit_type ""
 	
@@ -200,6 +263,16 @@ ${members}}
 "
 	
 	
+      end
+
+      attribute 136834 "id"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
       end
     end
 
@@ -247,7 +320,7 @@ ${members}}
       end
 
       operation 130178 "getPatrols"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 0
 	
 	
@@ -261,7 +334,7 @@ ${members}}
       end
 
       operation 130562 "getPatrol"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "patrolID" explicit_type ""
 	
@@ -272,6 +345,16 @@ ${members}}
 "
 	
 	
+      end
+
+      attribute 135554 "id"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
       end
     end
 
@@ -321,6 +404,68 @@ ${members}}
 "
 	    classrelation_ref 129666 // <aggregation>
       end
+
+      operation 137858 "getId"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      attribute 135682 "id"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 139010 "getPatrols"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 139138 "getPoliceStations"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 139266 "getCriminals"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
     end
 
     class 128130 "Player"
@@ -346,8 +491,60 @@ ${members}}
 	    classrelation_ref 129922 // <aggregation>
       end
 
+      operation 137730 "getId"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 137346 "getName"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 137602 "getPassword"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 137474 "getMoney"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}
+{
+  ${body}}
+"
+	
+	
+      end
+
       operation 129922 "getPoliceStations"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 0
 	
 	
@@ -361,7 +558,7 @@ ${members}}
       end
 
       operation 130050 "getPoliceStation"
-	public explicit_return_type ""
+	public explicit_return_type "void"
 	nparams 1
 	  param in name "id" explicit_type ""
 	
@@ -372,6 +569,16 @@ ${members}}
 "
 	
 	
+      end
+
+      attribute 135426 "id"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
       end
     end
   end

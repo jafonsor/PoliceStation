@@ -1,31 +1,55 @@
 <?php
 
+$projbasedir = $_SESSION["basedir"];
+$DATABASE_PHP = realpath($projbasedir."/dbinterface/Database.php");
+$DATABASE_EXCEPTION_PHP =
+	realpath($projbasedir."/exception/DatabaseException.php");
+$SESSION_EXCEPTION_PHP =
+	realpath($projbasedir."/exception/SessionException.php");
+require_once($DATABASE_EXCEPTION_PHP);
+require_once($SESSION_EXCEPTION_PHP);
+
 class PoliceStationService {
 	
 	public function excute() {
-		database = getDatabase();
+		$database = $this->getDatabase();
 		
 		/*
 		   I think there must be a connect for each php page.
 		   In order to hide that from the application side i think establishing the connection here is the best choice.
 		*/
-		database->connect();
+		$database->connect();
 		
-		database->start_transaction();
-		dispatch();
-		database->commit();
-		database->close_connection();
+		$database->start_transaction();
+		try {
+			$this->dispatch();
+		} catch(DatabaseException $d) {
+			$database->rollback();
+			ErrorLog::log( $d->getErrorType(), $d->getFile(), $d->getLine(), $d->getMessage());
+			$database->close_all_connections();
+			exit(ErrorPages::databaseErrorPage($d->getMessage()));
+		} catch(SessionException $s) {
+			$database->rollback();
+			ErrorLog::log( $s->getErrorType(), $s->getFile(), $s->getLine(), $s->getMessage());
+			$database->close_all_connections();
+			exit(ErrorPages::sessionErrorPage($s->getMessage()));
+		} catch(Exception $e) {
+			$database->rollback();
+			$database->close_connection();
+			throw $e;
+		}
+		$database->commit();
+		$database->close_connection();
 	}
 	
 	private function getDatabase() {
-		return _SESSION["database"];
+		return $_SESSION["database"];
 	}
 	
-	public getGame() {
-		return getDatabase()->getGame();
+	public function getGame() {
+		return $_SESSION["game"];
 	}
 
-	// this function is responsable for closing the connection if any exception is thrown inside it.
 	public abstract function dispatch();
 }
 ?>

@@ -1,6 +1,6 @@
 format 70
 "domain" // domain
-  revision 3
+  revision 4
   modified_by 2 "joao"
   // class settings
   //class diagram settings
@@ -47,7 +47,6 @@ format 70
       draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab no class_drawing_mode default drawing_language default show_context_mode no auto_label_position yes show_relation_modifiers default show_relation_visibility default show_infonote default shadow no show_stereotype_properties default
       size A4
     end
-
   end
 
   package_ref 128130 // data

@@ -34,14 +34,18 @@ abstract class Database {
 
   public abstract function connect();
   public abstract function close_connection();
-  protected abstract function select_db($dbname);
+  public abstract function close_all_connections();
+  protected abstract function select_db();
   public abstract function query($queryStr);
   public abstract function num_rows($result);
   public abstract function fetch_array($result);
   public abstract function fetch_assoc($result);
   public abstract function start_transaction();
   public abstract function commit();
+  public abstract function rollback();
   public abstract function field_name($result, $indice);
+  public abstract function num_fields($result);
   public abstract function fetch_row($result);
+  public abstract function last_error();
 }
 ?>

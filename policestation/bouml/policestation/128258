@@ -1,6 +1,6 @@
 format 70
 "translation" // domain::translation
-  revision 2
+  revision 3
   modified_by 2 "joao"
   // class settings
   //class diagram settings
@@ -55,6 +55,20 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      operation 139522 "translateStat"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "statName" explicit_type ""
+	  param in name "language" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}${)}
+{
+  ${body}}
+"
+	
+	
+      end
     end
 
     class 129026 "UnitNameTranslator"
@@ -68,6 +82,20 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      operation 139394 "translateUnitId"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "unitId" explicit_type ""
+	  param in name "language" explicit_type ""
+	
+	
+	php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}${)}
+{
+  ${body}}
+"
+	
+	
+      end
     end
   end
 
