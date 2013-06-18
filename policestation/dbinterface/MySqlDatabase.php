@@ -40,28 +40,19 @@ class MySqlDatabase extends Database {
 	 */
 	public function connect() {
 		$this->incrementNumberOfConnections();
-		if($this->getOpenedConnection()) {
-			$connection = mysql_connect(
-					$this->getHost().":".$this->getPort(),
-					$this->getUsername(),
-					$this->getPassword(),
-					$this->getConnection());
-		} else {
+		if(!$this->getOpenedConnection()) {
 			$connection = mysql_connect(
 					$this->getHost().":".$this->getPort(),
 					$this->getUsername(),
 					$this->getPassword());
+			$this->setConnection($connection);
 		}
 		
 		if($connection == false) {
 			echo "The connection failled!\n";
 			exit(ErrorPage::databaseErrorPage("Connection to host faild: " . mysql_error()));
 		}
-		if($connection == null) {
-			echo "Null connection!\n";
-		} else {
-			echo "not null connection\n";
-		}
+		
 		$this->select_db();
 		$this->connectionOpened();
 	}
