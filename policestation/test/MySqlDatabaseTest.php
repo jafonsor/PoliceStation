@@ -20,13 +20,15 @@ function cdBack($path) {
 	return $newPath;
 }
 
-$basedir = cdBack(__DIR__);
+$projbasedir = cdBack(__DIR__);
 
-$_SESSION["basedir"] = $basedir;
+$_SESSION["basedir"] = $projbasedir;
 
 echo "base dir: " . cdBack(__DIR__);
 
-require_once '/var/www/policestation/dbinterface/MySqlDatabase.php';
+require_once($projbasedir."/dbinterface/MySqlDatabase.php");
+require_once($projbasedir."/utils/ErrorLog.php");
+require_once($projbasedir."/utils/ErrorPages.php");
 echo "Teste à class MySqlDatabase:<br>";
 
 $_SESSION["database"] = new MySqlDatabase("police","911polICE","police","localhost","3307");
@@ -42,7 +44,7 @@ else
 	echo "a ligação não é null<br>";
 
 $query = "Insert into Players (id,username,password,lastTimeLogged)
-          values(1,'joao','pass',CURRENT_TIME)";
+          values(1,'joao','pass',CURRENT_TIMESTAMP)";
 $result = $database->query($query);
 
 echo "a verificar o resultado o insert<br>";
@@ -54,7 +56,7 @@ else
 try {
 	
 if(!$result) {
-	//throw new DatabaseException($query);
+	throw new DatabaseException($query);
 }
 
 echo "insert bem sucedido<br>";
@@ -95,7 +97,9 @@ if( $database->num_rows( $result ) > 0 ) {
 echo "</table>";
 
 } catch (ErrorLogException $e) {
-	echo $e->getMessage() . "<br>";
+	$database->close_all_connections();
+	ErrorLog::logException($e);
+	exit(ErrorPages::databaseErrorPage($e->getMessage()));
 }
 
 $database->close_connection();

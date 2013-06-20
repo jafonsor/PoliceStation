@@ -10,11 +10,13 @@ class DatabaseException extends ErrorLogException {
 	public function __construct($query) {
 		if(isset($_SESSION["database"])) {
 			$database = $_SESSION["database"];
+			echo "DatabaseException: database defined: " . $database->last_error() . "<br>";
 			parent::__construct(ErrorLogException::DATABASE,
-					            $database->last_error() ."\nQuery: " . PHP_EOL . $query);
+					            $database->last_error() ."\nQuery: "  . $query);
 		} else {
+			//echo "DatabaseException: database undefined<br>";
 			parent::__construct(ErrorLogException::DATABASE,
-					            "Query: " . PHP_EOL . $query);
+					            "Query: " . $query);
 		}
 	}
 }

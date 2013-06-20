@@ -47,5 +47,6 @@ abstract class Database {
   public abstract function num_fields($result);
   public abstract function fetch_row($result);
   public abstract function last_error();
+  public abstract function real_escape_string($str);
 }
 ?>

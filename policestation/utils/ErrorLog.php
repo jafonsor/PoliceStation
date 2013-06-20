@@ -4,6 +4,7 @@ $projbasedir = $_SESSION["basedir"];
 $ERROR_LOG_EXCEPTION_PHP =
 	realpath($projbasedir."/exception/ErrorLogException.php");
 require_once($ERROR_LOG_EXCEPTION_PHP);
+require_once($projbasedir."/utils/FatalErrorLog.php");
 
 class ErrorLog {
 	
@@ -16,22 +17,40 @@ class ErrorLog {
 	}
 	
 	public static function logException(ErrorLogException $e) {
-		ErrorLog::log($e->getErrorType(),$e->getFile(),$e->getLine(),$e->getMessage());
+		ErrorLog::log($e->getErrorType(),
+		              $e->getFile(),
+		              $e->getLine(),
+		              $e->getMessage(),
+		              $e->getTraceAsString());
+	}
+	
+	public static function log($type,$file,$line,$message) {
+		ErrorLog::logWithTrace($type,$file,$line,$message,"NULL");
 	}
 
-	public static function log($type,$file,$line,$message) {
+	public static function logWithTrace($type,$file,$line,$message,$trace) {
 		$database = ErrorLog::checkAndGetDatabase();
 		$database->connect();
 		$database->start_transaction();
-		$query = sprintf("INSERT INTO TABLE ErrorLog (id,date,type,file,line,message) values(%s,%s,%s,%s,%s)",
+		$query = sprintf("INSERT INTO ErrorLog (id,logDate,type,fileName,line,message,trace)
+				          VALUES(%s,%s,'%s','%s',%s,'%s',%s)",
 			          ErrorLog::getLastErrorId(),
 			          "CURRENT_TIMESTAMP",
 			          $type,
 			          $file,
 			          $line,
-			          $message);
-		$_SESSION["database"]->query( $query );
+			          $database->real_escape_string($message),
+		              $trace);
+		$result = $database->query( $query );
+		if($result==false) {
+			$database->rollback();
+			$database->close_all_connections();
+			$e = new DatabaseException($query);
+			FatalErrorLog::logException($e);
+			exit(ErrorPages::databaseErrorPage($e->getMessage()));
+		}
 		$database->commit();
+		echo "o log foi commitado<br>";
 		$database->close_connection();
 	}
 	
@@ -40,8 +59,23 @@ class ErrorLog {
 		$query = "SELECT MAX(id) as maxId
 		          FROM   ErrorLog";
 		$result = $database->query( $query );
+		
+		if($result==false) {
+			$database->rollback();
+			$database->close_all_connections();
+			$e = new DatabaseException($query);
+			FatalErrorLog::logException($e);
+			exit(ErrorPages::databaseErrorPage($e->getMessage()));
+		}
 		$row = $database->fetch_assoc($result);
-		return $row["maxId"];
+		
+		if($row["maxId"] == null) {
+			// there are no logs in the table so there isn't a max id.
+			$finalResult = 1;
+		} else {
+			$finalResult = $row["maxId"];
+		}
+		return $finalResult+1;
 	}
 }
 

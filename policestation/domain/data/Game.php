@@ -14,7 +14,7 @@ class Game {
 		$query = sprintf( "SELECT id, password
 		                   FROM Player
 		                   WHERE username = %s",
-		                   database->real_escape_string($username) );
+		                   $database->real_escape_string($username) );
 		$result = $database->query($query);
 		ErrorChecker::isInvalidQueryResult($result,__FILE__,__LINE__,$query);
 		if($database->num_rows($result) != 1) {
