@@ -2,6 +2,8 @@
 
 $projbasedir = $_SESSION["basedir"];
 require_once($projbasedir."/dbinterface/Database.php");
+require_once($projbasedir."/utils/ErrorPages.php");
+
 
 class MySqlDatabase extends Database {
 
@@ -34,6 +36,7 @@ class MySqlDatabase extends Database {
 	 * I think this isn't rigth but I don't know how to do it.
 	 */
 	public function connect() {
+		echo "<br>--connect--<br>";
 		$this->incrementNumberOfConnections();
 		if(!$this->getOpenedConnection()) {
 			$connection = mysql_connect(
@@ -41,15 +44,15 @@ class MySqlDatabase extends Database {
 					$this->getUsername(),
 					$this->getPassword());
 			$this->setConnection($connection);
-		}
 		
-		if($connection == false) {
-			echo "The connection failled!\n";
-			exit(ErrorPage::databaseErrorPage("Connection to host faild: " . mysql_error()));
-		}
+			if($connection == false) {
+				echo "The connection failled!\n";
+				exit(ErrorPages::databaseErrorPage("Connection to host failed: " . mysql_error()));
+			}
 		
-		$this->select_db();
-		$this->connectionOpened();
+			$this->select_db();
+			$this->connectionOpened();
+		}
 	}
 
 	public function close_connection() {
@@ -57,7 +60,7 @@ class MySqlDatabase extends Database {
 		if($this->getNumberOfConnections() > 1) {
 			$this->decrementNumberOfConnections();
 		} else {
-			echo "mesmo fechada<br>";
+			echo "complitly closed<br>";
 			mysql_close( $this->getConnection() );
 			$this->connectionClosed();
 		}

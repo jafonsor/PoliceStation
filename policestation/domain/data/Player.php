@@ -16,7 +16,7 @@ class Player {
 		$insUsername = $database->real_escape_string($username);
 		$insPassword = SecurityUtils::passwordHash($password, $username);
 		
-		$query = sprintf("INSERT INTO Players (id,username,password) values(%s,%s,%s)",
+		$query = sprintf("INSERT INTO Players (id,username,password) values(%s,'%s','%s')",
 				$id,
 				$database->real_escape_string($insUsername),
 				$database->real_escape_string($insPassword));
@@ -28,7 +28,7 @@ class Player {
 			// This error may also be caused by trying to insert a duplicate id
 			// but hopefully that wont be the case.
 			if($database->errno() == ER_DUP_ENTRY) {
-				throw new DuplicatedUsernameExeception();
+				throw new DuplicatedUsernameException();
 			} else {
 				throw new DatabaseException($query);
 			}
