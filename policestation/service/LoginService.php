@@ -21,11 +21,11 @@ class LoginService extends PoliceStationService {
 	 * throws NonexistingPlayer if the username doesn't match any player's username.
 	 * throws WrongPasswordException if the password is wrong.
 	 */
-	public function dispatch() {
+	protected function dispatch() {
 		
 		$player = getGame()->getPlayerByName($this->username);
 		
-		$hashedPassword = passwordHashFunction($password, $player->getId());
+		$hashedPassword = SecurityUtils::passwordHash($password, $player->getUsername());
 		if( $hashedPassword != $player->getPassword() ) {
 			getDatabase()->closeConnection();
 			throw new WrongPasswordException();

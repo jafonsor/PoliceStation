@@ -1,12 +1,7 @@
 <?php
 
-session_start();
-
 $projbasedir = $_SESSION["basedir"];
-$DATABASE_PHP = realpath($projbasedir."/dbinterface/Database.php");
-$ERROR_CHECKER_PHP = realpath($projbasedir."/utils/ErrorChecker.php");
-require_once($DATABASE_PHP);
-require_once($ERROR_CHECKER_PHP);
+require_once($projbasedir."/dbinterface/Database.php");
 
 class MySqlDatabase extends Database {
 
@@ -124,6 +119,10 @@ class MySqlDatabase extends Database {
 	
 	public function last_error() {
 		return mysql_error();
+	}
+	
+	public function errno() {
+		return mysql_errno();
 	}
 	
 	public function real_escape_string($str) {

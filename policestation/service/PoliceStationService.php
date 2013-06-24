@@ -1,15 +1,16 @@
 <?php
 
+
 $projbasedir = $_SESSION["basedir"];
 $DATABASE_PHP = realpath($projbasedir."/dbinterface/Database.php");
 $DATABASE_EXCEPTION_PHP =
-	realpath($projbasedir."/exception/DatabaseException.php");
+	realpath($projbasedir."/exception/errorlog/DatabaseException.php");
 $SESSION_EXCEPTION_PHP =
-	realpath($projbasedir."/exception/SessionException.php");
+	realpath($projbasedir."/exception/errorlog/SessionException.php");
 require_once($DATABASE_EXCEPTION_PHP);
 require_once($SESSION_EXCEPTION_PHP);
 
-class PoliceStationService {
+abstract class PoliceStationService {
 	
 	public function excute() {
 		$database = $this->getDatabase();
@@ -50,6 +51,6 @@ class PoliceStationService {
 		return $_SESSION["game"];
 	}
 
-	public abstract function dispatch();
+	protected abstract function dispatch();
 }
 ?>

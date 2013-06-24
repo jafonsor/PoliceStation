@@ -3,7 +3,7 @@
 
 
 $projbasedir = $_SESSION["basedir"];
-$ERROR_LOG_EXCEPTION_PHP  = realpath($projbasedir."/exception/ErrorLogException.php");
+$ERROR_LOG_EXCEPTION_PHP  = realpath($projbasedir."/exception/errorlog/ErrorLogException.php");
 require_once($ERROR_LOG_EXCEPTION_PHP);
 
 class DatabaseException extends ErrorLogException {
