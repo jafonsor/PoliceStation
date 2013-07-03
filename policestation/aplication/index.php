@@ -1,3 +1,0 @@
-ComonElements::pageTop();
-
-ComonElements::pageBottom()
