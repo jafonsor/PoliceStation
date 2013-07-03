@@ -1,9 +1,8 @@
 <?php
 
 $projbasedir = $_SESSION["basedir"];
-$POLICE_STATION_SERVICE_PHP 
-	= realpath($projbasedir."/service/PoliceStationService.php");
-require_once($POLICE_STATION_SERVICE_PHP);
+require_once(realpath($projbasedir."/service/PoliceStationService.php"));
+require_once(realpath($projbasedir."/exception/domain/WrongPasswordException.php"));
 
 class LoginService extends PoliceStationService {
 
@@ -12,8 +11,8 @@ class LoginService extends PoliceStationService {
 	private $playerid;
 
 	public function __construct($username, $password) {
-		$this->username = username;
-		$this->password = password;
+		$this->username = $username;
+		$this->password = $password;
 	}
 	
 	
@@ -23,11 +22,10 @@ class LoginService extends PoliceStationService {
 	 */
 	protected function dispatch() {
 		
-		$player = getGame()->getPlayerByName($this->username);
+		$player = $this->getGame()->getPlayerByName($this->username);
 		
-		$hashedPassword = SecurityUtils::passwordHash($password, $player->getUsername());
-		if( $hashedPassword != $player->getPassword() ) {
-			getDatabase()->closeConnection();
+		$hashedPassword = SecurityUtils::passwordHash($this->password, $this->username);
+		if( $hashedPassword != $player->getHashedPassword() ) {
 			throw new WrongPasswordException();
 		}
 	}

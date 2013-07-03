@@ -26,11 +26,13 @@ $_SESSION["basedir"] = $projbasedir;
 
 echo "base dir: " . cdBack(__DIR__);
 
+require_once($projbasedir."/initConstants.php");
 require_once($projbasedir."/dbinterface/MySqlDatabase.php");
 require_once($projbasedir."/utils/ErrorLog.php");
 require_once($projbasedir."/utils/ErrorPages.php");
 echo "Teste à class MySqlDatabase:<br>";
 
+//$_SESSION["database"] should be set at initConstants.php but to test MySqlDatabase it must be reset. 
 $_SESSION["database"] = new MySqlDatabase("police","911polICE","police","localhost","3307");
 
 $database = $_SESSION["database"];

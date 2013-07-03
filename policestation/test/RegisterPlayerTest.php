@@ -8,7 +8,7 @@ $projbasedir = $_SESSION["basedir"];
 echo "projbasedir: " . $projbasedir . "<br>";
 require_once($projbasedir."/service/RegisterPlayerService.php");
 
-echo "RegisterPlayerTest<br>";
+echo "<br><br> >> RegisterPlayerTest << <br>";
 		
 function test($username,$password) {
 	$service = new RegisterPlayerService($username,$password);
@@ -21,14 +21,23 @@ function test($username,$password) {
 	}
 }
 
+$username = "joao";
+$password = "pass";
 
 echo "Registering a player: ";
-test("joao","pass");
+test($username,$password);
 echo "<br>";
 
 echo "Testing duplicate username: ";
-test("joao","pass");
+test($username,$password);
 echo "<br>";
 
+echo "Testing null username: ";
+test(null, $password);
+echo "<br>";
+
+echo "Testing null password: ";
+test($username, null);
+echo "<br>";
 
 ?>

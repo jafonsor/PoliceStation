@@ -1,7 +1,8 @@
 <?php
 
 $projbasedir = $_SESSION["basedir"];
-require_once($projbasedir."/domain/data/Player.php");
+require_once(realpath($projbasedir."/domain/data/Player.php"));
+require_once(realpath($projbasedir."/exception/domain/NonexistentPlayerException.php"));
 
 class Game {
 
@@ -12,15 +13,15 @@ class Game {
 	public function getPlayerByName($username) {
 		$database = $_SESSION["database"];
 		$query = sprintf( "SELECT id, password
-		                   FROM Player
-		                   WHERE username = %s",
+		                   FROM Players
+		                   WHERE username = '%s'",
 		                   $database->real_escape_string($username) );
 		$result = $database->query($query);
 		if(!$result) {
 			throw new DatabaseException($query);
 		}
 		if($database->num_rows($result) != 1) {
-			throw new NonexistingPlayer();
+			throw new NonexistentPlayerException();
 		}
 		$row = $database->fetch_assoc($result); 
 		return new Player( $row["id"], $username, $row["password"] );

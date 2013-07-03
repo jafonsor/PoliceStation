@@ -11,6 +11,10 @@ class Player {
 	
 	private $id;
 	
+	public function __construct($id) {
+		$this->id = $id;
+	}
+	
 	public static function insertOnDatabase($id,$username,$password) {
 		$database = $_SESSION["database"];
 		$insUsername = $database->real_escape_string($username);
@@ -50,7 +54,7 @@ class Player {
 	public function getUsername() {
 		$database = $_SESSION["database"];
 		
-		$query = sprintf("SELECT username FROM Playeres WHERE id='%s'",
+		$query = sprintf("SELECT username FROM Players WHERE id='%s'",
 				$database->real_escape_string($this->id));
 		$result = $database->query($query);
 		
@@ -70,7 +74,7 @@ class Player {
  	public function getHashedPassword() {
 	  	$database = $_SESSION["database"];
 	  	
-	  	$query = sprintf("SELECT password FROM Playeres WHERE id='%s'",
+	  	$query = sprintf("SELECT password FROM Players WHERE id='%s'",
 	  			$database->real_escape_string($this->id));
 	  	$result = $database->query($query);
 	  	
@@ -94,7 +98,7 @@ class Player {
 	public function getPoliceStations() {
 	}
 
-	public function getPoliceStation($id) {
+	public function getPoliceStation($policeStationId) {
 	}
 }
 ?>

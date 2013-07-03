@@ -36,7 +36,10 @@ class MySqlDatabase extends Database {
 	 * I think this isn't rigth but I don't know how to do it.
 	 */
 	public function connect() {
-		echo "<br>--connect--<br>";
+		
+		if($_SESSION["debug"] == true)
+			echo "<br>[DEBUG] --connect--<br>";
+		
 		$this->incrementNumberOfConnections();
 		if(!$this->getOpenedConnection()) {
 			$connection = mysql_connect(
@@ -46,7 +49,9 @@ class MySqlDatabase extends Database {
 			$this->setConnection($connection);
 		
 			if($connection == false) {
-				echo "The connection failled!\n";
+				if($_SESSION["debug"] == true)
+					echo "[DEBUG] The connection failled!\n";
+				
 				exit(ErrorPages::databaseErrorPage("Connection to host failed: " . mysql_error()));
 			}
 		
@@ -56,18 +61,28 @@ class MySqlDatabase extends Database {
 	}
 
 	public function close_connection() {
-		echo "closed connection. " . ($this->getNumberOfConnections() - 1) . " connections to go. <br>";
-		if($this->getNumberOfConnections() > 1) {
-			$this->decrementNumberOfConnections();
-		} else {
-			echo "complitly closed<br>";
+		
+		if($_SESSION["debug"] == true)
+			echo "[DEBUG] closed connection. " . ($this->getNumberOfConnections() - 1) . " connections to go. <br>";
+		
+		if($this->getNumberOfConnections() <= 1) {
+			
+			if($_SESSION["debug"] == true)
+				echo "[DEBUG] complitly closed<br>";
+			
 			mysql_close( $this->getConnection() );
 			$this->connectionClosed();
+			$this->resetNumberOfConnections();
+		} else {
+			$this->decrementNumberOfConnections();
 		}
 	}
 	
 	public function close_all_connections() {
-		echo "closed all connections <br>";
+		
+		if($_SESSION["debug"] == true)
+			echo "[DEBUG] closed all connections <br>";
+		
 		if($this->getOpenedConnection()) {
 			mysql_close( $this->getConnection() );
 			$this->connectionClosed();

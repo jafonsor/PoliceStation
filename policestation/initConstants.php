@@ -8,4 +8,5 @@
 	
 	$_SESSION["database"] = new MySqlDatabase("police","911polICE","police","localhost","3307");
 	$_SESSION["game"] = new Game();
+	$_SESSION["debug"] = true;
 ?>
