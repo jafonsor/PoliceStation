@@ -14,7 +14,7 @@ function test($username,$password) {
 	$service = new RegisterPlayerService($username,$password);
 	
 	try {
-		$service->excute();
+		$service->execute();
 		echo "player succefully registered.";
 	} catch(DuplicatedUsernameException $d) {
 		echo "player ".$username." alredy exists.";

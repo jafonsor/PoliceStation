@@ -17,7 +17,7 @@ $registerService = new RegisterPlayerService($username, $password);
 
 echo "Regists the player: ";
 try {
-	$registerService->excute();
+	$registerService->execute();
 	echo "the player was registered.<br>";
 } catch(DuplicatedUsernameException $d) {
 	echo "the player already was registered. The password may not be the expected.".
@@ -27,7 +27,7 @@ try {
 echo "Testing noexistante player: ";
 $loginService = new LoginService($nonexistantUsername, $password);
 try {
-	$loginService->excute();
+	$loginService->execute();
 	echo "login successefull. The username doesn't exist. The loging should have failed. [FAIL]<br>";
 } catch(NonexistentPlayerException $n) {
 	echo "noesitent player. [OK]<br>";
@@ -38,7 +38,7 @@ try {
 echo "Testing wrong passord: ";
 $loginService = new LoginService($username, $wrongPassword);
 try {
-	$loginService->excute();
+	$loginService->execute();
 	echo "login successful. The password was wrong. The login should have failed. [FAIL]<br>";
 } catch(NonexistentPlayerException $n) {
 	echo "noesitent player. The player should exist. [FAIL]<br>";
@@ -49,7 +49,7 @@ try {
 echo "Testing login: ";
 $loginService = new LoginService($username, $password);
 try {
-	$loginService->excute();
+	$loginService->execute();
 	echo "login successfull. [OK]<br>";
 } catch(NonexistentPlayerException $n) {
 	echo "noesitent player. The player should exist. [FAIL]<br>";
@@ -60,7 +60,7 @@ try {
 echo "Testing null username: ";
 $loginService = new LoginService(null, $password);
 try {
-	$loginService->excute();
+	$loginService->execute();
 	echo "login successful. <br>";
 } catch(NonexistentPlayerException $n) {
 	echo "noesitent player.<br>";

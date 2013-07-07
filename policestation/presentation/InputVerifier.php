@@ -3,13 +3,19 @@
 class InputVerifier {
 	public static function validPassword($password) {
 		$result = true;
-		//checks if $password is valid
+		
+		if($password = "")
+			$result = false;
+		
 		return $result;
 	}
 	
 	public static function validUsername($username) {
 		$result = true;
-		//checks if $username is valid
+		
+		if($username == "")
+			$result = false;
+		
 		return $result;
 	}
 }

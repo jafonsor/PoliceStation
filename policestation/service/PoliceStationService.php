@@ -8,7 +8,7 @@ require_once($projbasedir."/utils/ErrorLog.php");
 
 abstract class PoliceStationService {
 	
-	public function excute() {
+	public function execute() {
 		$database = $this->getDatabase();
 		
 		/*

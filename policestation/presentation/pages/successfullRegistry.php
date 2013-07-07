@@ -11,6 +11,7 @@
 	</head>
 	<body>
 		<?php require_once($commonBodyFile);?>
-		<a href="register.php">Registar</a>
+		<p class"comfirmMessage">Registo efectuado com sucesso.</p>
+		<p>Voltar à <a href="index.php">primeira página</a>.</p>
 	</body>
 </html>
