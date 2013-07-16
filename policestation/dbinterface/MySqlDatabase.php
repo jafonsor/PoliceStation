@@ -1,11 +1,19 @@
 <?php
 
+namespace policestation\dbinterface;
+
+
 $projbasedir = $_SESSION["basedir"];
 require_once($projbasedir."/dbinterface/Database.php");
 require_once($projbasedir."/utils/ErrorPages.php");
 
+function loadmysqldatabase($classname) {
+	require_once(__FILE__);
+}
 
-class MySqlDatabase extends Database {
+spl_autoload_register('policestation\dbinterface\loadmysqldatabase');
+
+class MySqlDatabase extends \Database {
 
 	private $openedConnection; // boolean that is true if $connection is open and false otherwise.
 	private $connection;
@@ -52,7 +60,7 @@ class MySqlDatabase extends Database {
 				if($_SESSION["debug"] == true)
 					echo "[DEBUG] The connection failled!\n";
 				
-				exit(ErrorPages::databaseErrorPage("Connection to host failed: " . mysql_error()));
+				exit(\ErrorPages::databaseErrorPage("Connection to host failed: " . mysql_error()));
 			}
 		
 			$this->select_db();

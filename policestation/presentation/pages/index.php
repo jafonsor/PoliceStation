@@ -1,8 +1,8 @@
 <?php 
 	session_start();
 	$projbasedir = $_SESSION["basedir"];
-	$commonHeadFile = realpath(projbasedir."/presentation/common/commonHead.html");
-	$commonBodyFile = realpath(projbasedir."/presentation/common/commonBody.htm");
+	$commonHeadFile = realpath($projbasedir."/presentation/pages/common/commonHead.html");
+	$commonBodyFile = realpath($projbasedir."/presentation/pages/common/commonBody.html");
 ?>
 
 <html>

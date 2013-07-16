@@ -1,11 +1,19 @@
 <?php
 
+namespace policestation\domain\data;
+
 $projbasedir = $_SESSION["basedir"];
 require_once($projbasedir."/exception/domain/DuplicatedUsernameException.php");
 require_once($projbasedir."/exception/domain/NonexistentPlayerException.php");
 require_once($projbasedir."/exception/domain/WrongPasswordException.php");
 require_once($projbasedir."/exception/errorlog/DatabaseException.php");
 require_once($projbasedir."/utils/SecurityUtils.php");
+
+use policestation\exception\domain\DuplicatedUsernameException as DuplicatedUsernameException;
+use policestation\exception\domain\NonexistentPlayerException as NonexistentPlayerException;
+use policestation\exception\domain\WrongPasswordException as WrongPasswordException;
+use policestation\exception\errorlog\DatabaseException as DatabaseException;
+use policestation\utils\SecurityUtils as SecurityUtils;
 
 class Player {
 	

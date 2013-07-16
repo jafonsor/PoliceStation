@@ -19,7 +19,6 @@ function cdBack($path) {
 }
 
 $projbasedir = cdBack(__DIR__);
-$_SESSION["basedir"] = $projbasedir;
 
 require_once(realpath($projbasedir."/initConstants.php"));
 require_once(realpath($projbasedir."/test/RegisterPlayerTest.php"));

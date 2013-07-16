@@ -1,6 +1,8 @@
 <?php 
 
-class NonexistentPlayerException extends Exception {
+namespace policestation\exception\domain;
+
+class NonexistentPlayerException extends \Exception {
 	
 	private $id = -1;
 	

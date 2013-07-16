@@ -1,8 +1,13 @@
 <?php
 
+namespace policestation\test;
+
 $projbasedir = $_SESSION["basedir"];
 require_once(realpath($projbasedir."/service/RegisterPlayerService.php"));
 require_once(realpath($projbasedir."/service/LoginService.php"));
+
+use policestation\service\RegisterPlayerService as RegisterPlayerService;
+use policestation\service\LoginService as LoginService;
 
 echo "<br><br>  >> LoginServiceTest << <br>";
 
@@ -71,7 +76,7 @@ try {
 echo "Testing null password: ";
 $loginService = new LoginService($username, null);
 try {
-	$loginService->excute();
+	$loginService->execute();
 	echo "login successful. <br>";
 } catch(NonexistentPlayerException $n) {
 	echo "noesitent player.<br>";

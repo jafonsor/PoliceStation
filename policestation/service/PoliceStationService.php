@@ -1,10 +1,19 @@
 <?php
 
+namespace policestation\service;
 
 $projbasedir = $_SESSION["basedir"];
-require_once($projbasedir."/exception/errorlog/DatabaseException.php");
-require_once($projbasedir."/exception/errorlog/SessionException.php");
-require_once($projbasedir."/utils/ErrorLog.php");
+require_once( realpath($projbasedir."/exception/errorlog/DatabaseException.php") );
+require_once( realpath($projbasedir."/exception/errorlog/SessionException.php") );
+require_once( realpath($projbasedir."/utils/ErrorLog.php") );
+
+use policestation\exception\errorlog\DatabaseException as DatabaseException;
+use policestation\exception\errorlog\SessionException as SessionException;
+use policestation\utils\ErrorLog as ErrorLog;
+
+require_once( realpath($projbasedir."/dbinterface/Database.php") );
+require_once($projbasedir."/dbinterface/MySqlDatabase.php");
+require_once($projbasedir."/dbinterface/PostgresDatabase.php");
 
 abstract class PoliceStationService {
 	

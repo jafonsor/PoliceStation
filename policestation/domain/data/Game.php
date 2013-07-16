@@ -1,8 +1,16 @@
 <?php
 
+namespace policestation\domain\data;
+
 $projbasedir = $_SESSION["basedir"];
 require_once(realpath($projbasedir."/domain/data/Player.php"));
 require_once(realpath($projbasedir."/exception/domain/NonexistentPlayerException.php"));
+require_once(realpath($projbasedir."/exception/errorlog/DatabaseException.php"));
+
+use policestation\domain\data\Player as Player;
+use policestation\exception\domain\NonexistentPlayerException as NonexistentPlayerException;
+use policestation\exception\errorlog\DatabaseException as DatabaseException;
+
 
 class Game {
 

@@ -1,8 +1,12 @@
 <?php
 
+namespace policestation\service;
+
 $projbasedir = $_SESSION["basedir"];
 require_once(realpath($projbasedir."/service/PoliceStationService.php"));
 require_once(realpath($projbasedir."/exception/domain/WrongPasswordException.php"));
+
+use policestation\exception\domain\WrongPasswordException as WrongPasswordException;
 
 class LoginService extends PoliceStationService {
 

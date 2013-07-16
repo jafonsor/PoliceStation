@@ -2,6 +2,8 @@
 
 <?php
 
+namespace policestation\test;
+
 session_start();
 
 function cdBack($path) {
@@ -30,6 +32,11 @@ require_once($projbasedir."/initConstants.php");
 require_once($projbasedir."/dbinterface/MySqlDatabase.php");
 require_once($projbasedir."/utils/ErrorLog.php");
 require_once($projbasedir."/utils/ErrorPages.php");
+
+use policestation\dbinterface\MySqlDatabase as MySqlDatabase;
+use policestation\utils\ErrorLog as ErrorLog;
+use policestation\utils\ErrorPages as ErrorPages;
+
 echo "Teste à class MySqlDatabase:<br>";
 
 //$_SESSION["database"] should be set at initConstants.php but to test MySqlDatabase it must be reset. 

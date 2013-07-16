@@ -1,5 +1,9 @@
 <?php
 
+namespace policestation\utils;
+
+use policestation\exception\errorlog\ErrorLogException as ErrorLogException;
+
 class FatalErrorLog {
 	public static function logException(ErrorLogException $e) {
 		FatalErrorLog::logWithTrace($e->getErrorType(),

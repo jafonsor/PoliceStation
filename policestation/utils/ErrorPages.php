@@ -1,5 +1,7 @@
 <?php
 
+namespace policestation\utils;
+
 class ErrorPages {
 
 	public static function databaseErrorPage($message) {

@@ -1,8 +1,8 @@
 <?php
 
+namespace policestation\service;
 
 $projbasedir = $_SESSION["basedir"];
-
 require_once($projbasedir."/service/PoliceStationService.php");
 
 class RegisterPlayerService extends PoliceStationService {

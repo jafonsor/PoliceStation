@@ -1,6 +1,9 @@
 <?php
+
+namespace policestation\exception\errorlog;
+
 // an exception that should be logged and will cause the end of the program
-class ErrorLogException extends Exception {
+class ErrorLogException extends \Exception {
 	
 	private $errorType;
 	

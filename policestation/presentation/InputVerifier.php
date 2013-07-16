@@ -1,5 +1,7 @@
 <?php 
 
+namespace policestation\presentation;
+
 class InputVerifier {
 	public static function validPassword($password) {
 		$result = true;

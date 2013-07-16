@@ -1,8 +1,9 @@
 <?php
 
+namespace policestation\exception\errorlog;
+
 $projbasedir = $_SESSION["basedir"];
-$ERROR_LOG_EXCEPTION_PHP  = realpath($projbasedir."/exception/errorlog/ErrorLogException.php");
-require_once($ERROR_LOG_EXCEPTION_PHP);
+require_once(realpath($projbasedir."/exception/errorlog/ErrorLogException.php"));
 
 class SessionException extends ErrorLogException {
 	public function __construct($var) {

@@ -1,8 +1,13 @@
 <?php
 
+namespace policestation\utils;
+
 $projbasedir = $_SESSION["basedir"];
 require_once($projbasedir."/exception/errorlog/ErrorLogException.php");
 require_once($projbasedir."/utils/FatalErrorLog.php");
+
+use policestation\errorlog\ErrorLogException as ErrorLogException;
+use policestation\errorlog\DatabaseException as DatabaseException;
 
 class ErrorLog {
 	

@@ -1,12 +1,17 @@
 <?php 
 
+namespace policestation\test;
+
 if(!isset($_SESSION["basedir"])){
 	echo "To test services run the ServicesTests.php<br>";
 	exit();
 }
+
 $projbasedir = $_SESSION["basedir"];
 echo "projbasedir: " . $projbasedir . "<br>";
 require_once($projbasedir."/service/RegisterPlayerService.php");
+
+use policestation\service\RegisterPlayerService as RegisterPlayerService;
 
 echo "<br><br> >> RegisterPlayerTest << <br>";
 		
