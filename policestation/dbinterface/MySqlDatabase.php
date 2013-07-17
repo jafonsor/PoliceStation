@@ -45,8 +45,10 @@ class MySqlDatabase extends \Database {
 	 */
 	public function connect() {
 		
-		if($_SESSION["debug"] == true)
+		if($_SESSION["debug"] == true) {
 			echo "<br>[DEBUG] --connect--<br>";
+			echo "[DEBUG] Host: " . $this->getHost() . ", username: " . $this->getUsername() . "<br>";
+		}
 		
 		$this->incrementNumberOfConnections();
 		if(!$this->getOpenedConnection()) {
@@ -58,13 +60,16 @@ class MySqlDatabase extends \Database {
 		
 			if($connection == false) {
 				if($_SESSION["debug"] == true)
-					echo "[DEBUG] The connection failled!\n";
+					echo "[DEBUG] The connection failled!<br>";
 				
 				exit(\ErrorPages::databaseErrorPage("Connection to host failed: " . mysql_error()));
+			} else {
+				if($_SESSION["debug"] == true)
+					echo "[DEBUG] connection established<br>";
+				
+				$this->select_db();
+				$this->connectionOpened();
 			}
-		
-			$this->select_db();
-			$this->connectionOpened();
 		}
 	}
 

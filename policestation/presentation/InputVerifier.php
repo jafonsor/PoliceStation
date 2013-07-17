@@ -6,7 +6,7 @@ class InputVerifier {
 	public static function validPassword($password) {
 		$result = true;
 		
-		if($password = "")
+		if($password == "" || $password == null)
 			$result = false;
 		
 		return $result;
@@ -15,7 +15,7 @@ class InputVerifier {
 	public static function validUsername($username) {
 		$result = true;
 		
-		if($username == "")
+		if($username == "" || $username == null)
 			$result = false;
 		
 		return $result;

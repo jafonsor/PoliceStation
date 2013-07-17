@@ -30,7 +30,6 @@
 		$basedir = remove_until_match("policestation",__FILE__);
 		$unrealPath = $basedir . str_replace("\\", "/",$className.".php");
 		$path = realpath($unrealPath);
-		echo $path . "<br>";
 		require_once( $path );
 		echo "classe carregada com sucesso!<br>";
 	}
@@ -40,43 +39,7 @@
 
 	namespace policestation\presentation\pages;
 
-	session_start();
-	
-	$database = $_SESSION["database"];
-	$_SESSION["database"]->connect();
-	$result = $_SESSION["database"]->query("SELECT * FROM Players");
-	echo "<table>";
-
-	if( $database->num_rows( $result ) > 0 ) {
-		
-		//get the names and the number of fields and displays them in the top row of the table.
-		$numberOfFields = $database->num_fields($result);
-		echo "<tr>";
-		for( $i=0; $i < $numberOfFields; $i++) {
-			$name = $database->field_name($result, $i);
-			echo "<td>".$name."</td>";
-		}
-		echo "</tr>";
-		
-		while( $row = $database->fetch_row($result) ) {
-			echo "<tr>";
-			for($i=0; $i< $numberOfFields; $i++) {
-				echo "<td>".$row[$i]."</td>";
-			}
-			echo "</tr>";
-		}
-		
-		
-	} else {
-		echo "<tr><td>O resultado tem zero linhas</td></tr>";
-	}
-	echo "</table>";
-	$_SESSION["database"]->close_connection();
-	
-	die();
-	
-	echo "not dead!<br>";
-	
+	session_start();	
 	$projbasedir = $_SESSION["basedir"];
 	require_once( realpath($projbasedir."/service/RegisterPlayerService.php") );
 	require_once( realpath($projbasedir."/presentation/InputVerifier.php") );
@@ -96,18 +59,18 @@
 	$username = "";
 	
 	//verify form data
-	if(isset($_GET["username"]) && isset($_GET["password"]) && isset($_GET["repassword"])) {
-		$username = $_GET["username"];
+	if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["repassword"])) {
+		$username = $_POST["username"];
 		
-		$badUsernameFormat = !InputVerifier::validUsername($_GET["username"]);
-		$badPasswordFormat = !InputVerifier::validPassword($_GET["password"]);
+		$badUsernameFormat = !InputVerifier::validUsername($_POST["username"]);
+		$badPasswordFormat = !InputVerifier::validPassword($_POST["password"]);
 		
 		if( !$badUsernameFormat && !$badUsernameFormat) {
-			if($_GET["password"] == $_GET["repassword"]) {
+			if($_POST["password"] == $_POST["repassword"]) {
 				
 				try {
-					echo "vai executar o serviço! " . $_GET["password"] . "<br>";
-					$service = new RegisterPlayerService($_GET["username"], $_GET["password"]);
+					echo "vai executar o serviço! " . $_POST["password"] . "<br>";
+					$service = new RegisterPlayerService($_POST["username"], $_POST["password"]);
 					$service->execute();
 					
 					//the user was successfully registered
@@ -129,7 +92,7 @@
 	</head>
 	<body>
 		<?php require_once($commonBodyFile); ?>
-		<form action="register.php" method="get">
+		<form action="register.php" method="post">
 			<table>
 			<tr> 
 				<td>Username:</td>
