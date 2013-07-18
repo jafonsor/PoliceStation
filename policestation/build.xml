@@ -1,6 +1,6 @@
 <project name="PoliceStation" basedir="." default="show">
 
-	<property file="db.properties" prefix="sql"/>
+	<property file="psql.properties" prefix="sql"/>
 	<property name="sql.db.url" value="${sql.url}/${sql.database}" />
 
 	<property name="db.dir" value="database"/>
