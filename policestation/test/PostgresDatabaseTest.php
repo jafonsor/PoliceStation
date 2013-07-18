@@ -26,9 +26,9 @@ $_SESSION["basedir"] = $projbasedir;
 
 echo "base dir: " . cdBack(__DIR__) . "<br>";
 
-require_once($projbasedir."/dbinterface/MySqlDatabase.php");
-require_once($projbasedir."/utils/ErrorLog.php");
-require_once($projbasedir."/utils/ErrorPages.php");
+require_once(realpath($projbasedir."/dbinterface/PostgresDatabase.php"));
+require_once(realpath($projbasedir."/utils/ErrorLog.php"));
+require_once(realpath($projbasedir."/utils/ErrorPages.php"));
 echo "Teste à class PostgresDatabase:<br>";
 
 $user="ist169657"; /* inserir aqui username do sigma */
@@ -37,7 +37,7 @@ $port=5432;
 $password="vonn4255"; /* inserir aqui password do psql_reset */
 $dbname = $user;
 
-$_SESSION["database"] = new PostegresDatabase($user,$password,$dbname,$host,$port);
+$_SESSION["database"] = new PostgresDatabase($user,$password,$dbname,$host,$port);
 
 $database = $_SESSION["database"];
 

@@ -8,7 +8,7 @@ $ERROR_CHECKER_PHP = realpath($projbasedir."/utils/ErrorChecker.php");
 require_once($DATABASE_PHP);
 require_once($ERROR_CHECKER_PHP);
 
-class MySqlDatabase extends Database {
+class PostgresDatabase extends Database {
 
 	private $openedConnection; // boolean that is true if $connection is open and false otherwise.
 	private $connection;
