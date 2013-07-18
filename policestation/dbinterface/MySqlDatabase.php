@@ -1,14 +1,19 @@
 <?php
 
-session_start();
+namespace policestation\dbinterface;
+
 
 $projbasedir = $_SESSION["basedir"];
-$DATABASE_PHP = realpath($projbasedir."/dbinterface/Database.php");
-$ERROR_CHECKER_PHP = realpath($projbasedir."/utils/ErrorChecker.php");
-require_once($DATABASE_PHP);
-require_once($ERROR_CHECKER_PHP);
+require_once($projbasedir."/dbinterface/Database.php");
+require_once($projbasedir."/utils/ErrorPages.php");
 
-class MySqlDatabase extends Database {
+function loadmysqldatabase($classname) {
+	require_once(__FILE__);
+}
+
+spl_autoload_register('policestation\dbinterface\loadmysqldatabase');
+
+class MySqlDatabase extends \Database {
 
 	private $openedConnection; // boolean that is true if $connection is open and false otherwise.
 	private $connection;
@@ -39,6 +44,12 @@ class MySqlDatabase extends Database {
 	 * I think this isn't rigth but I don't know how to do it.
 	 */
 	public function connect() {
+		
+		if($_SESSION["debug"] == true) {
+			echo "<br>[DEBUG] --connect--<br>";
+			echo "[DEBUG] Host: " . $this->getHost() . ", username: " . $this->getUsername() . "<br>";
+		}
+		
 		$this->incrementNumberOfConnections();
 		if(!$this->getOpenedConnection()) {
 			$connection = mysql_connect(
@@ -46,30 +57,45 @@ class MySqlDatabase extends Database {
 					$this->getUsername(),
 					$this->getPassword());
 			$this->setConnection($connection);
-		}
 		
-		if($connection == false) {
-			echo "The connection failled!\n";
-			exit(ErrorPage::databaseErrorPage("Connection to host faild: " . mysql_error()));
+			if($connection == false) {
+				if($_SESSION["debug"] == true)
+					echo "[DEBUG] The connection failled!<br>";
+				
+				exit(\ErrorPages::databaseErrorPage("Connection to host failed: " . mysql_error()));
+			} else {
+				if($_SESSION["debug"] == true)
+					echo "[DEBUG] connection established<br>";
+				
+				$this->select_db();
+				$this->connectionOpened();
+			}
 		}
-		
-		$this->select_db();
-		$this->connectionOpened();
 	}
 
 	public function close_connection() {
-		echo "closed connection. " . ($this->getNumberOfConnections() - 1) . " connections to go. <br>";
-		if($this->getNumberOfConnections() > 1) {
-			$this->decrementNumberOfConnections();
-		} else {
-			echo "mesmo fechada<br>";
+		
+		if($_SESSION["debug"] == true)
+			echo "[DEBUG] closed connection. " . ($this->getNumberOfConnections() - 1) . " connections to go. <br>";
+		
+		if($this->getNumberOfConnections() <= 1) {
+			
+			if($_SESSION["debug"] == true)
+				echo "[DEBUG] complitly closed<br>";
+			
 			mysql_close( $this->getConnection() );
 			$this->connectionClosed();
+			$this->resetNumberOfConnections();
+		} else {
+			$this->decrementNumberOfConnections();
 		}
 	}
 	
 	public function close_all_connections() {
-		echo "closed all connections <br>";
+		
+		if($_SESSION["debug"] == true)
+			echo "[DEBUG] closed all connections <br>";
+		
 		if($this->getOpenedConnection()) {
 			mysql_close( $this->getConnection() );
 			$this->connectionClosed();
@@ -124,6 +150,10 @@ class MySqlDatabase extends Database {
 	
 	public function last_error() {
 		return mysql_error();
+	}
+	
+	public function errno() {
+		return mysql_errno();
 	}
 	
 	public function real_escape_string($str) {

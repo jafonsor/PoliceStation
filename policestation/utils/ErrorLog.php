@@ -1,10 +1,13 @@
 <?php
 
+namespace policestation\utils;
+
 $projbasedir = $_SESSION["basedir"];
-$ERROR_LOG_EXCEPTION_PHP =
-	realpath($projbasedir."/exception/ErrorLogException.php");
-require_once($ERROR_LOG_EXCEPTION_PHP);
+require_once($projbasedir."/exception/errorlog/ErrorLogException.php");
 require_once($projbasedir."/utils/FatalErrorLog.php");
+
+use policestation\errorlog\ErrorLogException as ErrorLogException;
+use policestation\errorlog\DatabaseException as DatabaseException;
 
 class ErrorLog {
 	

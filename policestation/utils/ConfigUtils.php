@@ -1,5 +1,7 @@
 <?php
 
+namespace policestation\utils;
+
 class ConfigUtils {
 
 //http://stackoverflow.com/questions/5900077/does-php-allow-properties-file-as-in-java

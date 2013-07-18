@@ -1,9 +1,12 @@
 <?php
 
+namespace policestation\service;
+
 $projbasedir = $_SESSION["basedir"];
-$POLICE_STATION_SERVICE_PHP 
-	= realpath($projbasedir."/service/PoliceStationService.php");
-require_once($POLICE_STATION_SERVICE_PHP);
+require_once(realpath($projbasedir."/service/PoliceStationService.php"));
+require_once(realpath($projbasedir."/exception/domain/WrongPasswordException.php"));
+
+use policestation\exception\domain\WrongPasswordException as WrongPasswordException;
 
 class LoginService extends PoliceStationService {
 
@@ -12,8 +15,8 @@ class LoginService extends PoliceStationService {
 	private $playerid;
 
 	public function __construct($username, $password) {
-		$this->username = username;
-		$this->password = password;
+		$this->username = $username;
+		$this->password = $password;
 	}
 	
 	
@@ -21,13 +24,12 @@ class LoginService extends PoliceStationService {
 	 * throws NonexistingPlayer if the username doesn't match any player's username.
 	 * throws WrongPasswordException if the password is wrong.
 	 */
-	public function dispatch() {
+	protected function dispatch() {
 		
-		$player = getGame()->getPlayerByName($this->username);
+		$player = $this->getGame()->getPlayerByName($this->username);
 		
-		$hashedPassword = passwordHashFunction($password, $player->getId());
-		if( $hashedPassword != $player->getPassword() ) {
-			getDatabase()->closeConnection();
+		$hashedPassword = SecurityUtils::passwordHash($this->password, $this->username);
+		if( $hashedPassword != $player->getHashedPassword() ) {
 			throw new WrongPasswordException();
 		}
 	}

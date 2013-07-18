@@ -1,12 +1,9 @@
 <?php
-
 session_start();
 
 $projbasedir = $_SESSION["basedir"];
-$DATABASE_PHP = realpath($projbasedir."/dbinterface/Database.php");
-$ERROR_CHECKER_PHP = realpath($projbasedir."/utils/ErrorChecker.php");
-require_once($DATABASE_PHP);
-require_once($ERROR_CHECKER_PHP);
+require_once( realpath($projbasedir."/dbinterface/Database.php") );
+require_once( realpath($projbasedir."/utils/ErrorChecker.php") );
 
 class PostgresDatabase extends Database {
 
@@ -136,4 +133,5 @@ class PostgresDatabase extends Database {
 		return pg_escape_string($str);
 	}
 }
+
 ?>

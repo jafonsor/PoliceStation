@@ -1,6 +1,6 @@
 <?php
 
-start_session();
+namespace policestation\utils;
 
 class FilesystemUtils {
 	

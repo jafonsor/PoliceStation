@@ -1,6 +1,16 @@
 <?php
 
-// include Player, ErrorChecker
+namespace policestation\domain\data;
+
+$projbasedir = $_SESSION["basedir"];
+require_once(realpath($projbasedir."/domain/data/Player.php"));
+require_once(realpath($projbasedir."/exception/domain/NonexistentPlayerException.php"));
+require_once(realpath($projbasedir."/exception/errorlog/DatabaseException.php"));
+
+use policestation\domain\data\Player as Player;
+use policestation\exception\domain\NonexistentPlayerException as NonexistentPlayerException;
+use policestation\exception\errorlog\DatabaseException as DatabaseException;
+
 
 class Game {
 
@@ -9,16 +19,17 @@ class Game {
 	 * throws NonexistingPlayer exception if the username doesn't match any player
 	 */
 	public function getPlayerByName($username) {
-		ErrorChecker::issetSessionVar("database",__FILE__,__LINE__);
 		$database = $_SESSION["database"];
 		$query = sprintf( "SELECT id, password
-		                   FROM Player
-		                   WHERE username = %s",
+		                   FROM Players
+		                   WHERE username = '%s'",
 		                   $database->real_escape_string($username) );
 		$result = $database->query($query);
-		ErrorChecker::isInvalidQueryResult($result,__FILE__,__LINE__,$query);
+		if(!$result) {
+			throw new DatabaseException($query);
+		}
 		if($database->num_rows($result) != 1) {
-			throw new NonexistingPlayer();
+			throw new NonexistentPlayerException();
 		}
 		$row = $database->fetch_assoc($result); 
 		return new Player( $row["id"], $username, $row["password"] );
@@ -28,7 +39,6 @@ class Game {
 	 * gets the new id from the database, and updates the data base.
 	 */
 	public function generatePlayerId() {
-		ErrorChecker::issetSessionVar("database",__FILE__,__LINE__);
 		$database = $_SESSION["database"];
 		
 		//get the nextId
@@ -36,7 +46,9 @@ class Game {
 		          FROM Game
 		          WHERE varName='nextPlayerId'";
 		$result = $database->query( $query );
-		ErrorChecker::isInvalidQueryResult($result,__FILE__,__LINE__,$query);
+		if(!$result) {
+			throw new DatabaseException($query);
+		}
 		$row = $database->fetch_assoc($result);
 		
 		$newId = $row["varValue"];
@@ -49,6 +61,20 @@ class Game {
 		$database->query( $query );
 		
 		return $newId;
+	}
+	
+	public function addPlayer($username,$password) {
+		Player::insertOnDatabase($this->generatePlayerId(),$username,$password);
+	}
+	
+	/**
+	 * Function to be used in login.
+	 * returns the Player with the $username corresponds to the $password
+	 * throws WrongPasswordException if $password doesn't correspond to $username 
+	 */
+	public function verifyPassword($username,$password) {
+		$player = $this->getPlayerByName($username);
+		$player->verifyPassword($password);
 	}
 
 }
